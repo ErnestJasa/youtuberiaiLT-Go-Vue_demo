@@ -27,3 +27,13 @@ func Any[T any](items []T, predicate func(T) bool) bool {
 	}
 	return false
 }
+
+func RemoveEmptyStrings(strings []string) []string {
+	var result = strings
+	for i, string := range strings {
+		if string == "" {
+			result = append(result[:i], result[i+1:]...)
+		}
+	}
+	return result
+}
