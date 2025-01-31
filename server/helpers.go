@@ -10,7 +10,7 @@ func Filter[T any](items []T, predicate func(T) bool) []T {
 	return result
 }
 
-func All[T any](items []T, predicate func(T) bool) bool {
+func AllInclude[T any](items []T, predicate func(T) bool) bool {
 	for _, item := range items {
 		if !predicate(item) {
 			return false
@@ -19,7 +19,7 @@ func All[T any](items []T, predicate func(T) bool) bool {
 	return true
 }
 
-func Any[T any](items []T, predicate func(T) bool) bool {
+func AnyOneIncludes[T any](items []T, predicate func(T) bool) bool {
 	for _, item := range items {
 		if predicate(item) {
 			return true
@@ -36,4 +36,17 @@ func RemoveEmptyStrings(strings []string) []string {
 		}
 	}
 	return result
+}
+
+func AscendingString(value1 string, value2 string) bool {
+	return value1 < value2
+}
+func DescendingString(value1 string, value2 string) bool {
+	return value1 > value2
+}
+func AscendingNumber(value1 int64, value2 int64) bool {
+	return value1 < value2
+}
+func DescendingNumber(value1 int64, value2 int64) bool {
+	return value1 > value2
 }

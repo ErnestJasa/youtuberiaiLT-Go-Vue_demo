@@ -6,9 +6,11 @@ import (
 )
 
 func main() {
-	http.HandleFunc("/api/youtubers", GetChannels)
-	http.HandleFunc("/api/categories", GetCategories)
+	mux := http.NewServeMux()
+	mux.HandleFunc("/api/youtubers", GetChannels)
+	mux.HandleFunc("/api/categories", GetCategories)
 
+	handlerWithCORS := EnableCORS(mux)
 	log.Println("server is running on port 8080")
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe(":8080", handlerWithCORS))
 }
