@@ -38,15 +38,9 @@ func RemoveEmptyStrings(strings []string) []string {
 	return result
 }
 
-func AscendingString(value1 string, value2 string) bool {
+func Ascending[T string | int | int64](value1 T, value2 T) bool {
 	return value1 < value2
 }
-func DescendingString(value1 string, value2 string) bool {
-	return value1 > value2
-}
-func AscendingNumber(value1 int64, value2 int64) bool {
-	return value1 < value2
-}
-func DescendingNumber(value1 int64, value2 int64) bool {
+func Descending[T string | int | int64](value1 T, value2 T) bool {
 	return value1 > value2
 }

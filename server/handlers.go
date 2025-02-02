@@ -44,19 +44,19 @@ func GetChannels(w http.ResponseWriter, r *http.Request) {
 	switch sortOrder {
 	case "ByHandleAscending", "1":
 		sort.Slice(result, func(i, j int) bool {
-			return AscendingString(result[i].Title, result[j].Title)
+			return Ascending(result[i].Title, result[j].Title)
 		})
 	case "ByHandleDescending", "2":
 		sort.Slice(result, func(i, j int) bool {
-			return DescendingString(result[i].Title, result[j].Title)
+			return Descending(result[i].Title, result[j].Title)
 		})
 	case "BySubCountAscending", "3":
 		sort.Slice(result, func(i, j int) bool {
-			return AscendingNumber(int64(result[i].SubscriberCount), int64(result[j].SubscriberCount))
+			return Ascending(int64(result[i].SubscriberCount), int64(result[j].SubscriberCount))
 		})
 	case "BySubCountDescending", "4":
 		sort.Slice(result, func(i, j int) bool {
-			return DescendingNumber(int64(result[i].SubscriberCount), int64(result[j].SubscriberCount))
+			return Descending(int64(result[i].SubscriberCount), int64(result[j].SubscriberCount))
 		})
 	}
 
