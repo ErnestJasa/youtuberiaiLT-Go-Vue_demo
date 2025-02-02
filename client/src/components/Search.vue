@@ -3,11 +3,48 @@ import { reactive, ref, watch } from "vue";
 import CategoryList from "./CategoryList.vue";
 import SortSelection from "./SortSelection.vue";
 import { searchParams } from "../store";
+import { removeFromArray } from "../helpers/ArrayHelpers";
 const showCategories = ref(false);
 
 const handleShowCategories = () => {
   showCategories.value = !showCategories.value;
 };
+
+function handleCategorySearch(categoryName) {
+  // add to includes array
+  if (
+    !searchParams.value.includeCategories.includes(categoryName) &&
+    !searchParams.value.excludeCategories.includes(categoryName)
+  ) {
+    searchParams.value.includeCategories = [
+      ...searchParams.value.includeCategories,
+      categoryName,
+    ];
+    return;
+  }
+
+  // remove from includes and add to excludes array
+  if (searchParams.value.includeCategories.includes(categoryName)) {
+    searchParams.value.includeCategories = removeFromArray(
+      searchParams.value.includeCategories,
+      categoryName
+    );
+    searchParams.value.excludeCategories = [
+      ...searchParams.value.excludeCategories,
+      categoryName,
+    ];
+    return;
+  }
+
+  // remove from excludes array
+  if (searchParams.value.excludeCategories.includes(categoryName)) {
+    searchParams.value.excludeCategories = removeFromArray(
+      searchParams.value.excludeCategories,
+      categoryName
+    );
+    return;
+  }
+}
 </script>
 <template>
   <section
@@ -15,7 +52,10 @@ const handleShowCategories = () => {
     :style="{ maxHeight: 'calc(-2rem + 100vh)', overflowY: 'auto' }"
   >
     <div className=" border border-gray-700 px-2">
-      <CategoryList :showCategories="showCategories" />
+      <CategoryList
+        :handleCategoryClick="handleCategorySearch"
+        :showCategories="showCategories"
+      />
       <button
         @click="handleShowCategories"
         class="w-full border rounded-xl py-0.5 text-lg text-center mt-2 lg:hidden"

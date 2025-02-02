@@ -4,5 +4,5 @@ export const searchParams = ref({
   search: "",
   includeCategories: [],
   excludeCategories: [],
-  sortOrder: "",
+  sortOrder: "Default",
 });

@@ -1,7 +1,8 @@
 <script setup>
 import { reactive, onMounted } from "vue";
+import { searchParams } from "../store";
 defineProps({
-  // categories: Array,
+  handleCategoryClick: Function,
   showCategories: Boolean,
 });
 const state = reactive({
@@ -21,13 +22,22 @@ onMounted(async () => {
 <template>
   <div
     v-if="state.categories.length && state.categories"
-    :className="`${showCategories ? 'block' : 'hidden'} lg:block md:p-6 p-2`"
+    :class="`${showCategories ? 'block' : 'hidden'} lg:block md:p-6 p-2`"
   >
-    <div className="flex flex-wrap gap-2 ">
+    <div class="flex flex-wrap gap-2">
       <button
+        :onclick="() => handleCategoryClick(category)"
         v-for="category in state.categories"
-        :key="{ category }"
-        className="cursor-pointer hover:bg-gray-800 border border-gray-800 inline-flex items-center text-lg px-2 py-0.5 uppercase"
+        :key="category"
+        :class="`
+           ${
+             searchParams.includeCategories.includes(category)
+               ? 'underline'
+               : searchParams.excludeCategories.includes(category)
+               ? 'line-through'
+               : ''
+           }
+           cursor-pointer hover:bg-gray-800 border border-gray-800 inline-flex items-center text-lg px-2 py-0.5 uppercase`"
       >
         {{ category.replace(/\s+/g, "_") }}
       </button>

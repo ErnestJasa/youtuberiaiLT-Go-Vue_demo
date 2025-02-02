@@ -1,9 +1,14 @@
+<script setup>
+import { searchParams } from "../store";
+</script>
+
 <template>
   <select
+    v-model="searchParams.sortOrder"
     className="uppercase text-lg focus:outline-none bg-inherit focus:bg-gray-900 w-full hover:bg-gray-900 flex items-center justify-between border border-input px-3 py-2 "
     id="sort-select"
   >
-    <option class="bg-gray-950" value="Default">Rūšiuoti</option>
+    <option selected class="bg-gray-950" value="Default">Rūšiuoti</option>
     <option class="bg-gray-950" value="ByHandleAscending">
       Pavadinimas A-Z
     </option>

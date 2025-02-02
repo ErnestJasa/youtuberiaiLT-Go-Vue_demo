@@ -1,5 +1,7 @@
 <script setup>
 import { ref } from "vue";
+import { searchParams } from "../store";
+import { formatNumber } from "../helpers/NumberFormatting";
 
 defineProps({
   channel: Object,
@@ -24,7 +26,11 @@ const count = ref(0);
       <div class="w-full">
         <div class="flex w-[95%] flex-wrap">
           <div
-            class="text-xs uppercase tracking-wide mr-2 text-gray-500"
+            :class="`${
+              searchParams.includeCategories.includes(category)
+                ? 'bg-slate-800 text-gray-300'
+                : 'text-gray-500'
+            } text-xs uppercase tracking-wide mr-2 `"
             v-for="category in channel.Categories"
             :key="category"
           >
@@ -39,11 +45,11 @@ const count = ref(0);
         <div class="flex gap-2 text-xs font-bold w-full">
           <div class="text-primary flex" title="Prenumeratorių sk.">
             subs:
-            <p>{{ channel.SubscriberCount }}</p>
+            <p>{{ formatNumber(channel.SubscriberCount) }}</p>
           </div>
           <div title="Video sk." className="text-gray-400/80 flex">
             vids:
-            <p className="ml-[2px]">{{ channel.VideoCount }}</p>
+            <p className="ml-[2px]">{{ formatNumber(channel.VideoCount) }}</p>
           </div>
         </div>
       </div>

@@ -7,9 +7,14 @@ const state = reactive({
 });
 const timer = ref(null);
 const loading = ref(false);
-watchEffect(async () => {
-  const searchTerm = searchParams.value.search;
 
+watchEffect(async () => {
+  const sortOrder = searchParams.value.sortOrder;
+  const searchTerm = searchParams.value.search;
+  const includeCategories =
+    searchParams.value.includeCategories.join("&includeCategory=");
+  const excludeCategories =
+    searchParams.value.excludeCategories.join("&excludeCategory=");
   if (timer.value) {
     clearTimeout(timer.value);
     timer.value = null;
@@ -18,7 +23,7 @@ watchEffect(async () => {
     try {
       loading.value = true;
       const response = await fetch(
-        `http://localhost:8080/api/youtubers?channelHandle=${searchTerm}`
+        `http://localhost:8080/api/youtubers?channelHandle=${searchTerm}&sortOrder=${sortOrder}&includeCategory=${includeCategories}&excludeCategory=${excludeCategories}`
       );
       const data = await response.json();
       state.channels = data;
