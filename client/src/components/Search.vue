@@ -1,35 +1,12 @@
 <script setup>
-import { reactive, ref } from "vue";
+import { reactive, ref, watch } from "vue";
 import CategoryList from "./CategoryList.vue";
 import SortSelection from "./SortSelection.vue";
+import { searchParams } from "../store";
 const showCategories = ref(false);
-const categories = [
-  "PODCAST",
-  "IVAIRUS",
-  "ZAIDIMAI",
-  "ANIMACIJA",
-  "PREKINIS ZENKLAS",
-  "VLOG",
-  "HUMORAS",
-  "RECENZIJOS",
-  "MINECRAFT",
-  "EDUKACIJA",
-  "MUZIKA",
-  "MASINOS",
-  "DOKUMENTIKA",
-  "FORTNITE",
-  "GTA",
-  "COUNTER-STRIKE",
-  "INSTITUCIJA",
-  "ESE",
-  "LEAGUE OF LEGENDS",
-  "ZINIOS",
-  "KULINARIJA",
-];
+
 const handleShowCategories = () => {
-  console.log("clicked");
   showCategories.value = !showCategories.value;
-  console.log(showCategories.value);
 };
 </script>
 <template>
@@ -38,20 +15,20 @@ const handleShowCategories = () => {
     :style="{ maxHeight: 'calc(-2rem + 100vh)', overflowY: 'auto' }"
   >
     <div className=" border border-gray-700 px-2">
-      <CategoryList :showCategories="showCategories" :categories="categories" />
+      <CategoryList :showCategories="showCategories" />
       <button
         @click="handleShowCategories"
-        class="w-full border rounded-xl py-0.5 text-lg text-center mt-2"
+        class="w-full border rounded-xl py-0.5 text-lg text-center mt-2 lg:hidden"
       >
         Kategorijos
       </button>
       <form
-        onSubmit="{handleSearchSubmit}"
+        @submit.prevent="handleSearchSubmit"
         className="w-full my-3 lg:flex gap-2 "
       >
         <div className="w-full flex relative">
           <input
-            ref="{inputRef}"
+            v-model="searchParams.search"
             className="uppercase py-1 border border-gray-200 focus:bg-gray-900 hover:bg-gray-900  focus:outline-none focus:border focus:border-r hover:border-[#edd6b7] focus:border-[#e1a44f] w-full bg-inherit pl-3 text-xl font-normal"
             type="text"
             placeholder="Ieškoti kanalo..."
