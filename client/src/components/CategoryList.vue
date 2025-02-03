@@ -13,11 +13,6 @@ const loading = ref(false);
 const categorySearchInput = ref("");
 
 const filteredCategories = computed(() => {
-  console.log(
-    state.categories.filter((category) =>
-      category.toLowerCase().includes(categorySearchInput.value.toLowerCase())
-    )
-  );
   return state.categories.filter((category) =>
     category.toLowerCase().includes(categorySearchInput.value.toLowerCase())
   );

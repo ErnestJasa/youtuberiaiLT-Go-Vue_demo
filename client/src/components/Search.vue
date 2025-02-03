@@ -74,13 +74,6 @@ function handleCategorySearch(categoryName) {
             placeholder="Ieškoti kanalo..."
           />
           <button
-            type="submit"
-            className="flex items-center justify-center border md:w-[35%] lg:w-auto px-4 border-l-0 border-gray-200 hover:border-l hover:bg-gray-900 hover:border-[#e1a44f] active:border-[#e1a44f] active:bg-[#3f356aac]   hover:opacity-100"
-          >
-            <!-- <SearchSVG className="w-6 sm:w-5" /> -->
-            Search
-          </button>
-          <button
             onClick="{clearInput}"
             type="button"
             className="absolute right-16 md:right-[100px] lg:right-16 top-2 opacity-50 hover:opacity-100 active:opacity-100"
