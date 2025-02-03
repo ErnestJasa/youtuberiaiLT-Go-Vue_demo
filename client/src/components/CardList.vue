@@ -2,8 +2,9 @@
 import { reactive, watchEffect, ref, watch } from "vue";
 import Card from "./Card.vue";
 import { searchParams } from "../store";
+import Loader from "./Loader.vue";
 const state = reactive({
-  channels: Array,
+  channels: [],
 });
 const timer = ref(null);
 const loading = ref(false);
@@ -19,9 +20,10 @@ watchEffect(async () => {
     clearTimeout(timer.value);
     timer.value = null;
   }
+
+  loading.value = true;
   timer.value = setTimeout(async () => {
     try {
-      loading.value = true;
       const response = await fetch(
         `http://localhost:8080/api/youtubers?channelHandle=${searchTerm}&sortOrder=${sortOrder}&includeCategory=${includeCategories}&excludeCategory=${excludeCategories}`
       );
@@ -37,12 +39,15 @@ watchEffect(async () => {
 </script>
 <template>
   <section class="lg:col-span-2 flex flex-col gap-2 my-6">
-    <h2 v-if="loading">Loading...</h2>
+    <Loader v-if="loading" />
     <Card
-      v-else
+      v-else-if="state.channels && state.channels.length"
       v-for="channel in state.channels"
       :channel="channel"
       :key="channel.Id"
     />
+    <div v-else-if="!loading" class="text-3xl text-center m-2">
+      <h1>Kanalų nerasta.</h1>
+    </div>
   </section>
 </template>
