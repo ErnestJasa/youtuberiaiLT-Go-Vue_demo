@@ -1,7 +1,7 @@
 <script setup>
 import { reactive, watchEffect, ref, watch } from "vue";
 import Card from "./Card.vue";
-import { searchParams } from "../store";
+import { ApiURL, searchParams } from "../store";
 import Loader from "./Loader.vue";
 const state = reactive({
   channels: [],
@@ -25,7 +25,7 @@ watchEffect(async () => {
   timer.value = setTimeout(async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/youtubers?channelHandle=${searchTerm}&sortOrder=${sortOrder}&includeCategory=${includeCategories}&excludeCategory=${excludeCategories}`
+        `${ApiURL}/api/youtubers?channelHandle=${searchTerm}&sortOrder=${sortOrder}&includeCategory=${includeCategories}&excludeCategory=${excludeCategories}`
       );
       const data = await response.json();
       state.channels = data;

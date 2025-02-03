@@ -1,6 +1,6 @@
 <script setup>
 import { reactive, onMounted, computed, ref } from "vue";
-import { searchParams } from "../store";
+import { ApiURL, searchParams } from "../store";
 import Loader from "./Loader.vue";
 defineProps({
   handleCategoryClick: Function,
@@ -25,7 +25,7 @@ const filteredCategories = computed(() => {
 onMounted(async () => {
   try {
     loading.value = true;
-    const response = await fetch("http://localhost:8080/api/categories");
+    const response = await fetch(`${ApiURL}api/categories`);
     const data = await response.json();
     state.categories = data;
     loading.value = false;
