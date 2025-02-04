@@ -4,8 +4,8 @@ import CategoryList from "./CategoryList.vue";
 import SortSelection from "./SortSelection.vue";
 import { searchParams } from "../store";
 import { removeFromArray } from "../helpers/ArrayHelpers";
+import XInCircleSVG from "../assets/SVGs/XInCircleSVG.vue";
 const showCategories = ref(false);
-
 const handleShowCategories = () => {
   showCategories.value = !showCategories.value;
 };
@@ -45,10 +45,13 @@ function handleCategorySearch(categoryName) {
     return;
   }
 }
+function clearInput() {
+  searchParams.value.search = "";
+}
 </script>
 <template>
   <section
-    className="md:ml-4 lg:col-span-2 sticky h-full bg-gray-950 max-h-[35%] top-0 pt-6 z-10"
+    className="md:ml-4 md:col-span-2 sticky h-full bg-gray-950 max-h-[35%] top-0 pt-6 z-10"
     :style="{ maxHeight: 'calc(-2rem + 100vh)', overflowY: 'auto' }"
   >
     <div className=" border border-gray-700 px-2">
@@ -58,7 +61,7 @@ function handleCategorySearch(categoryName) {
       />
       <button
         @click="handleShowCategories"
-        class="w-full border rounded-xl py-0.5 text-lg text-center mt-2 lg:hidden"
+        class="w-full border rounded-xl py-0.5 text-lg text-center mt-2 md:hidden"
       >
         Kategorijos
       </button>
@@ -74,11 +77,11 @@ function handleCategorySearch(categoryName) {
             placeholder="Ieškoti kanalo..."
           />
           <button
-            onClick="{clearInput}"
+            @click="clearInput"
             type="button"
-            className="absolute right-16 md:right-[100px] lg:right-16 top-2 opacity-50 hover:opacity-100 active:opacity-100"
+            className="cursor-pointer absolute right-2 top-[50%] translate-y-[-50%] opacity-50 hover:opacity-100 active:opacity-100"
           >
-            <!-- <XInCircleSVG /> -->
+            <XInCircleSVG class="w-7 fill-gray-500 hover:fill-gray-400" />
           </button>
         </div>
         <div className="w-full lg:w-[60%] my-2 lg:-my-0">

@@ -38,7 +38,7 @@ watchEffect(async () => {
 });
 </script>
 <template>
-  <section class="lg:col-span-2 flex flex-col gap-2 my-6">
+  <section class="md:col-span-2 flex flex-col gap-2 my-6">
     <Loader v-if="loading" />
     <Card
       v-else-if="state.channels && state.channels.length"

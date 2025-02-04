@@ -36,7 +36,7 @@ onMounted(async () => {
     <input
       :class="`${
         showCategories ? 'block' : 'hidden'
-      } lg:block bg-inherit border border-gray-700 rounded px-3 py-1 focus:bg-gray-900 hover:bg-gray-900 focus:outline-none focus:border focus:border-r hover:border-gray-600 focus:border-[#e1a44f]`"
+      } md:block bg-inherit border border-gray-700 rounded px-3 py-1 focus:bg-gray-900 hover:bg-gray-900 focus:outline-none focus:border focus:border-r hover:border-gray-600 focus:border-[#e1a44f]`"
       v-model="categorySearchInput"
       type="text"
       placeholder="Ieškoti kategorijos"
@@ -46,7 +46,7 @@ onMounted(async () => {
     v-if="filteredCategories && filteredCategories.length"
     :class="`${
       showCategories ? 'block' : 'hidden'
-    } lg:block md:px-6 md:pb-6 p-2`"
+    } md:block md:px-1 lg:px-3 md:pb-6 p-2`"
   >
     <div class="flex flex-wrap gap-2">
       <button

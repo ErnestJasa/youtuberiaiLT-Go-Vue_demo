@@ -5,7 +5,7 @@ import Search from "./components/Search.vue";
 
 <template>
   <main
-    class="w-[90%] lg:w-[75%] grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 text-sky-100 mx-auto relative"
+    class="w-[90%] lg:w-[75%] grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-6 text-sky-100 mx-auto relative"
   >
     <Search />
     <CardList />
