@@ -2,6 +2,9 @@
 import { ref } from "vue";
 import { searchParams } from "../store";
 import { formatNumber } from "../helpers/NumberFormatting";
+import YoutubeSVG from "../assets/SVGs/YoutubeSVG.vue";
+import PersonSVG from "../assets/SVGs/PersonSVG.vue";
+import ArrowRightSVG from "../assets/SVGs/ArrowRightSVG.vue";
 
 defineProps({
   channel: Object,
@@ -44,11 +47,11 @@ const count = ref(0);
         </div>
         <div class="flex gap-2 text-xs font-bold w-full">
           <div class="text-primary flex" title="Prenumeratorių sk.">
-            subs:
+            <PersonSVG class="w-4 fill-primary" />
             <p>{{ formatNumber(channel.SubscriberCount) }}</p>
           </div>
           <div title="Video sk." className="text-gray-400/80 flex">
-            vids:
+            <YoutubeSVG class="w-4 fill-gray-700" />
             <p className="ml-[2px]">{{ formatNumber(channel.VideoCount) }}</p>
           </div>
         </div>
@@ -56,7 +59,7 @@ const count = ref(0);
       <div
         className="absolute right-3 top-[50%] translate-y-[-50%]  block lg:hidden group-hover/card:block"
       >
-        Open
+        <ArrowRightSVG class="w-6 fill-gray-300" />
       </div>
     </a>
   </article>
