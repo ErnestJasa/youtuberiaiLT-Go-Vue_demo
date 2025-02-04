@@ -1,7 +1,6 @@
 <script setup>
 import CardList from "./components/CardList.vue";
 import Search from "./components/Search.vue";
-// some test changes
 </script>
 
 <template>
