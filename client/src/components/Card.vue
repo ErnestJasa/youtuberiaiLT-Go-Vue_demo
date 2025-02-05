@@ -1,16 +1,24 @@
 <script setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { searchParams } from "../store";
 import { formatNumber } from "../helpers/NumberFormatting";
 import YoutubeSVG from "../assets/SVGs/YoutubeSVG.vue";
 import PersonSVG from "../assets/SVGs/PersonSVG.vue";
 import ArrowRightSVG from "../assets/SVGs/ArrowRightSVG.vue";
 
-defineProps({
+const props = defineProps({
   channel: Object,
 });
-
-const count = ref(0);
+const showFullDescription = ref(false);
+const truncatedDescription = computed(() => {
+  let description = props.channel.Description;
+  if (!showFullDescription.value) {
+    if (description !== "" && description.length > 45) {
+      description = description.substring(0, 45) + "...";
+    }
+  }
+  return description;
+});
 </script>
 
 <template>
@@ -44,6 +52,24 @@ const count = ref(0);
           <h2 class="text-2xl uppercase font-novecento w-[75%] lg:w-full">
             {{ channel.Title }}
           </h2>
+        </div>
+        <div class="max-w-[85%] py-2">
+          <p class="text-xs text-start">
+            {{ truncatedDescription }}
+            <span
+              ><button
+                v-if="
+                  channel.Description !== '' && channel.Description.length > 45
+                "
+                @click.prevent="
+                  () => (showFullDescription = !showFullDescription)
+                "
+                class="underline text-blue-500 cursor-pointer hover:text-blue-600"
+              >
+                {{ showFullDescription ? "Mažiau" : "Daugiau" }}
+              </button></span
+            >
+          </p>
         </div>
         <div class="flex gap-2 text-xs font-bold w-full">
           <div class="text-primary flex" title="Prenumeratorių sk.">
